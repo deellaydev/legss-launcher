@@ -3,19 +3,23 @@ import { useRoutesState } from '@renderer/shared/routes/state';
 import { Routes } from '@renderer/shared/routes/constants';
 import { CabinetModule } from '@renderer/modules/cabinet';
 import { observer } from 'mobx-react-lite';
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { Header } from '@renderer/widgets/header';
 
 const modules = {
   [Routes.MAIN]: <MainModule />,
-  [Routes.CABINET]: <CabinetModule />,
+  [Routes.CABINET]: <CabinetModule />
 };
 
 export const App = observer(function App() {
   const routesState = useRoutesState();
 
-  useEffect(() => {
+  useEffect(() => {}, [routesState.currentRoute]);
 
-  }, [routesState.currentRoute]);
-
-  return <>{modules[routesState.currentRoute]}</>;
+  return (
+    <>
+      <Header />
+      {modules[routesState.currentRoute]}
+    </>
+  );
 });
